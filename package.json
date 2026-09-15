@@ -26,9 +26,7 @@
     "react-dom": "19.2.8",
     "react-hook-form": "^7.88.0",
     "swiper": "^14.2.0",
-    "zod": "^4.6.5"
-  },
-  "devDependencies": {
+    "zod": "^4.6.5",
     "@tailwindcss/postcss": "^4",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
