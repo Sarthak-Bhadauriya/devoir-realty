@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import { Playfair_Display, Inter, Cormorant_Garamond, Plus_Jakarta_Sans } from 'next/font/google';
@@ -135,7 +136,9 @@ export default function RootLayout({
         <CustomCursor />
         <Navigation />
         <ThemeToggle />
-        <Analytics gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
+        <Suspense fallback={null}>
+          <Analytics gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} metaPixelId={process.env.NEXT_PUBLIC_META_PIXEL_ID} />
+        </Suspense>
         <main id="main-content" role="main">
           {children}
         </main>
