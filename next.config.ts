@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -9,23 +10,22 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.sanity.io',
+        hostname: 'videos.pexels.com',
         pathname: '/**',
       },
       {
         protocol: 'https',
-        hostname: 'videos.pexels.com',
+        hostname: 'devoirrealty.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.excellainfra.in',
         pathname: '/**',
       },
     ],
   },
-  // Required for mapbox-gl
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-    };
-    return config;
-  },
 };
 
 export default nextConfig;
+
