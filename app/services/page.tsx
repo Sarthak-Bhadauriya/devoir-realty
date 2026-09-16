@@ -1,185 +1,111 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Home, Key, TrendingUp, Building2, Search, FileCheck, Handshake, BarChart3 } from 'lucide-react';
+"use client";
 
-export const metadata: Metadata = {
-  title: 'Services',
-  description:
-    'Devoir Realty offers property sales, luxury rentals, investment advisory, and property management services across India.',
-};
+import React from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 
-const mainServices = [
-  {
-    Icon: Home,
-    title: 'Residential Advisory',
-    description: 'Helping you find the perfect home — whether a luxury flat, duplex, or independent house — with expert guidance tailored to your lifestyle and budget.',
-    features: ['Property valuation', 'Site visits & shortlisting', 'Builder negotiations', 'Documentation support', 'RERA compliance checks'],
-  },
-  {
-    Icon: Building2,
-    title: 'Commercial Real Estate',
-    description: 'Strategic solutions for buying, selling, or leasing office spaces, retail outlets, and commercial properties across Lucknow prime business corridors.',
-    features: ['Tenant sourcing', 'Lease negotiations', 'Site selection', 'Portfolio strategy', 'Market analysis'],
-  },
-  {
-    Icon: TrendingUp,
-    title: 'Investment Consulting',
-    description: 'Maximize your ROI with personalized real estate investment strategies informed by deep market intelligence and exclusive pre-launch project access.',
-    features: ['Portfolio strategy', 'Pre-launch access', 'Commercial investments', 'NRI advisory', 'Returns analysis'],
-  },
-  {
-    Icon: Key,
-    title: 'Project Marketing',
-    description: 'We partner with leading developers to market their projects, connecting them with the right buyers through our extensive client network across Lucknow.',
-    features: ['Developer partnerships', 'Buyer network', 'Site activations', 'Digital campaigns', 'Sales management'],
-  },
-  {
-    Icon: Search,
-    title: 'Legal and Compliance',
-    description: '100% legal and verified properties with end-to-end documentation support, RERA compliance checks, and transparent dealings — no hidden costs.',
-    features: ['Title verification', 'RERA compliance', 'Sale deed review', 'Registration support', 'Builder credibility checks'],
-  },
-  {
-    Icon: FileCheck,
-    title: 'Property Management',
-    description: 'Comprehensive management solutions to maintain and enhance property value — from maintenance oversight and tenant relations to financial reporting.',
-    features: ['Maintenance oversight', 'Tenant relations', 'Rental collections', 'Financial reporting', 'Renovation management'],
-  },
-];
-
-
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ServicesPage() {
+  // GSAP Scroll Animations
+  useGSAP(() => {
+    const reveals = gsap.utils.toArray('.reveal');
+    reveals.forEach((el: any) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, 
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+  }, []);
+
   return (
-    <div style={{ background: 'var(--color-black)', minHeight: '100vh', paddingTop: '80px' }}>
-      {/* Hero */}
-      <div style={{ padding: '80px 0 60px', borderBottom: '1px solid rgba(201,169,110,0.1)' }}>
-        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
-          <p className="label-text mb-4">What We Do</p>
-          <h1 style={{
-            fontFamily: 'var(--font-playfair)',
-            fontSize: 'clamp(36px, 5vw, 72px)',
-            fontWeight: 400,
-            color: 'var(--color-cream)',
-            lineHeight: 1.1,
-            maxWidth: '700px',
-          }}>
-            Our Real Estate{' '}
-            <em style={{ fontStyle: 'italic', color: 'var(--color-gold)' }}>Services</em>
-          </h1>
-        </div>
-      </div>
-
-      {/* Intro */}
-      <section className="section-padding" style={{ background: 'var(--color-cream)' }}>
-        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p style={{ fontFamily: 'var(--font-inter)', fontSize: '18px', fontWeight: 300, color: 'var(--color-taupe)', lineHeight: 1.85 }}>
-                At Devoir Realty, every service we offer is built around a single principle: our clients deserve the highest standard of professional excellence in real estate. That means expert advisors, not generalist salespeople. It means relationships built on trust and transparency, not just transactions. We are authorized channel partners of leading developers in Lucknow, giving you access to the best properties at the best prices.
-              </p>
-            </div>
-            <div style={{ display: 'flex', gap: '40px', justifyContent: 'flex-end' }}>
-              {[
-                { num: '300+', label: 'Transactions' },
-                { num: '15+', label: 'Years' },
-                { num: '50+', label: 'Agents' },
-              ].map(({ num, label }) => (
-                <div key={label} style={{ textAlign: 'center' }}>
-                  <div style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(28px, 3vw, 44px)', fontWeight: 700, color: 'var(--color-bronze)', lineHeight: 1, marginBottom: '8px' }}>
-                    {num}
-                  </div>
-                  <div style={{ fontFamily: 'var(--font-inter)', fontSize: '11px', color: 'var(--color-warm-gray)', letterSpacing: '0.2em', textTransform: 'uppercase' }}>
-                    {label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Core Services */}
-      <section className="section-padding-lg" style={{ background: 'var(--color-black)' }}>
-        <div className="max-w-[1600px] mx-auto px-8 md:px-16 lg:px-24">
-          <div className="text-center mb-16">
-            <p className="label-text mb-4">Core Services</p>
-            <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 400, color: 'var(--color-cream)', lineHeight: 1.1 }}>
-              Our Primary Offerings
-            </h2>
-            <span className="gold-line gold-line-center" style={{ marginTop: '16px' }} />
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: 'rgba(201,169,110,0.1)' }}>
-            {mainServices.map((service, i) => (
-              <div
-                key={service.title}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: i % 2 === 0 ? '1fr 1fr' : '1fr 1fr',
-                  background: i % 2 === 0 ? 'var(--color-charcoal)' : 'var(--color-black)',
-                  gap: '0',
-                }}
-                className="flex-col md:grid"
-              >
-                <div style={{ padding: '60px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: i % 2 === 0 ? 0 : 1 }}>
-                  <div style={{ marginBottom: '24px' }}>
-                    <service.Icon size={40} strokeWidth={1} style={{ color: 'var(--color-gold)' }} />
-                  </div>
-                  <h3 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: 400, color: 'var(--color-cream)', marginBottom: '20px' }}>
-                    {service.title}
-                  </h3>
-                  <p style={{ fontFamily: 'var(--font-inter)', fontSize: '16px', fontWeight: 300, color: 'var(--color-warm-gray)', lineHeight: 1.85, marginBottom: '32px' }}>
-                    {service.description}
-                  </p>
-                  <Link href="/contact" className="text-link" style={{ display: 'inline-flex' }}>
-                    Enquire Now →
-                  </Link>
-                </div>
-
-                <div style={{
-                  padding: '60px 56px',
-                  borderLeft: '1px solid rgba(201,169,110,0.1)',
-                  display: 'flex', flexDirection: 'column', justifyContent: 'center',
-                  order: i % 2 === 0 ? 1 : 0,
-                }}>
-                  <p style={{ fontFamily: 'var(--font-inter)', fontSize: '11px', color: 'var(--color-gold)', letterSpacing: '0.25em', textTransform: 'uppercase', marginBottom: '20px' }}>
-                    Includes
-                  </p>
-                  <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                    {service.features.map((f) => (
-                      <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                        <span style={{ width: '4px', height: '4px', borderRadius: '50%', background: 'var(--color-gold)', flexShrink: 0 }} />
-                        <span style={{ fontFamily: 'var(--font-inter)', fontSize: '15px', fontWeight: 300, color: 'var(--color-warm-gray)' }}>
-                          {f}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* CTA */}
-      <section className="section-padding" style={{ background: 'var(--color-charcoal)', textAlign: 'center' }}>
-        <div className="max-w-[600px] px-8" style={{ margin: '0 auto', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-          <p className="label-text mb-6">Get Started</p>
-          <h2 style={{ fontFamily: 'var(--font-playfair)', fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 400, color: 'var(--color-cream)', marginBottom: '20px', lineHeight: 1.2 }}>
-            Tell Us What You&apos;re Looking For
-          </h2>
-          <p style={{ fontFamily: 'var(--font-inter)', fontSize: '16px', fontWeight: 300, color: 'var(--color-warm-gray)', marginBottom: '40px', lineHeight: 1.8 }}>
-            Every engagement begins with a private conversation. We listen carefully before we advise.
+    <>
+      {/* PAGE HEADER */}
+      <section className="hero" style={{ padding: '120px 0 60px', minHeight: 'auto', textAlign: 'center' }}>
+        <div className="theme-container reveal">
+          <div className="eyebrow">Professional Real Estate Solutions</div>
+          <h1>Our <span>Services</span></h1>
+          <p className="hero-text" style={{ margin: '0 auto' }}>
+            Designed around your property goals.
           </p>
-          <Link href="/contact" className="btn-primary" style={{ fontSize: '12px' }}>
-            Schedule a Consultation
-          </Link>
         </div>
       </section>
-    </div>
+
+      {/* SERVICES */}
+      <section className="theme-section services">
+        <div className="theme-container">
+          <div className="services-grid">
+            <div className="service-card reveal">
+              <span className="service-number">01</span>
+              <div className="service-icon">⌂</div>
+              <h3>Residential Advisory</h3>
+              <p>Expert guidance in finding your perfect home—aligned with your lifestyle, preferences, and future goals.</p>
+            </div>
+            <div className="service-card reveal">
+              <span className="service-number">02</span>
+              <div className="service-icon">▦</div>
+              <h3>Commercial Leasing</h3>
+              <p>Strategic leasing solutions for retail, office, and warehouse spaces to drive business success.</p>
+            </div>
+            <div className="service-card reveal">
+              <span className="service-number">03</span>
+              <div className="service-icon">↗</div>
+              <h3>Investment Consulting</h3>
+              <p>Data-driven property investment strategies designed to maximize returns and minimize risks.</p>
+            </div>
+            <div className="service-card reveal">
+              <span className="service-number">04</span>
+              <div className="service-icon">◆</div>
+              <h3>Project Marketing</h3>
+              <p>End-to-end marketing and branding solutions that accelerate project visibility and sales velocity.</p>
+            </div>
+            <div className="service-card reveal">
+              <span className="service-number">05</span>
+              <div className="service-icon">✓</div>
+              <h3>Legal & Compliance</h3>
+              <p>Robust legal due diligence and compliance checks for transparent, dispute-free dealings.</p>
+            </div>
+            <div className="service-card reveal">
+              <span className="service-number">06</span>
+              <div className="service-icon">⚙</div>
+              <h3>Property Management</h3>
+              <p>Comprehensive property care—from tenant coordination to maintenance and rent collection.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* AMENITIES */}
+      <section className="theme-section amenities">
+        <div className="theme-container">
+          <div className="section-heading center reveal">
+            <div className="kicker">Amenities</div>
+            <h2>Comfort, <span>Security & Convenience</span></h2>
+            <p>Features designed to make modern property living easier and more comfortable.</p>
+          </div>
+          <div className="amenities-grid">
+            <div className="amenity reveal"><div className="amenity-icon">⚡</div><strong>24 Hour Power Backup</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">⌂</div><strong>Secure Entrance Gate</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">♟</div><strong>Guard Security</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">◉</div><strong>CCTV Surveillance</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">▣</div><strong>Ample Parking Space</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">✦</div><strong>Gym & Fitness Center</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">♧</div><strong>Children’s Play Area</strong></div>
+            <div className="amenity reveal"><div className="amenity-icon">🌿</div><strong>Landscaped Gardens</strong></div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
